@@ -23,6 +23,7 @@ const db = knex({
 app.use(express.json());
 app.use(cors());
 
+app.get('/', (req,res)=>{res.send('It is working')});
 app.post('/signin', (req, res)=>{signin.handleSignin(req,res,db,bcrypt)});
 app.post('/register', (req,res)=>{register.handleRegister(req, res, db, bcrypt)});
 app.get('/profile/:id', (req,res)=>{profile.handleProfile(req, res, db)});
@@ -30,6 +31,6 @@ app.put('/imagecount', (req,res)=>{imagecount.handleImagecount(req, res, db)});
 app.post('/image', (req,res)=>{imagecount.handleApicall(req, res)});
 
 
-app.listen(3000, () => {
-    console.log('App is running on port 3000');
+app.listen(process.env.PORT || 3000, () => {
+    console.log(`App is running on port ${process.env.PORT}`);
 })
